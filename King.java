@@ -1,6 +1,11 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -42,12 +47,42 @@ public class King {
         passLabel.setBounds(50, 170, 100, 25);
         p.add(passLabel);
 
-        // **እዚህ ጋር JPasswordField ተጠቀመን**
         JPasswordField passText = new JPasswordField();
         passText.setBounds(50, 200, 230, 30);
         p.add(passText);
 
-        // ፓነሉን ወደ  JFrame እናስገባለን
+        // 6. Login Button (አዝራር) መፍጠር [መጀመሪያ መፈጠር አለበት]
+        JButton loginButton = new JButton("Login");
+        loginButton.setBounds(115, 260, 100, 35);
+        p.add(loginButton);
+
+        // 7. Action Listener (ብዙ ዩዘሮችን የሚቀበል ሎጂክ) [ከፈጠርን በኋላ ይጻፋል]
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = userText.getText();
+                String password = new String(passText.getPassword());
+
+                // ተጠቃሚዎችን እና ፓስወርዶቻቸውን በ HashMap ማስቀመጥ
+                HashMap<String, String> validUsers = new HashMap<>();
+                validUsers.put("admin", "1234");
+                validUsers.put("kindalem", "5678");
+                validUsers.put("student", "2026");
+// 2. JPanel መፍጠር (ሙሉውን መስኮት እንዲሸፍን)
+        JPanel p = new JPanel();
+        p.setBackground(Color.RED);
+        p.setBounds(0, 0, 350, 450); // ልክ እንደ JFrame (350x450) መጠን
+        p.setLayout(null);
+                // ማረጋገጫ (Validation)
+                if (validUsers.containsKey(username) && validUsers.get(username).equals(password)) {
+                    JOptionPane.showMessageDialog(j, "Login Successful! Welcome, " + username);
+                } else {
+                    JOptionPane.showMessageDialog(j, "Invalid Username or Password!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        // ፓነሉን ወደ JFrame እናስገባለን
         j.add(p);
 
         // ዊንዶው እንዲታይ ማድረግ
