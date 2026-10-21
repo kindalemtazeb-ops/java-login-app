@@ -40,6 +40,7 @@ public class King {
         JTextField userText = new JTextField();
         userText.setBounds(50, 120, 230, 30);
         p.add(userText);
+        
 
         // 5. Password (የሚስጥር ቁጥር ማቀበያ)
         JLabel passLabel = new JLabel("Password:");
